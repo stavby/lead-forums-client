@@ -1,5 +1,10 @@
 import React from 'react';
+import PostPeekCard from './PostPeek';
 
-const HomePage = () => <>Homepage</>;
+const HomePage = () => (
+  <>
+    <PostPeekCard />
+  </>
+);
 
 export default HomePage;
