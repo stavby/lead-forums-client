@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box/Box';
 import React from 'react';
+import MoreTopicsButton from './MoreTopicsButton';
 import TopicCard from './TopicCard';
 
 const HomePage = () => (
@@ -10,6 +11,7 @@ const HomePage = () => (
       display={'flex'}
       flexDirection={'row-reverse'}
       borderRadius={1}
+      flexWrap={'wrap'}
     >
       <Box margin={2}>
         <TopicCard
@@ -41,6 +43,7 @@ const HomePage = () => (
           topicDescription={'פורום הפרויקטים הגדול. ניהול, הובלה, ייעוץ ועוד!'}
         />
       </Box>
+      {/* <MoreTopicsButton stx={{}} /> */}
     </Box>
   </>
 );

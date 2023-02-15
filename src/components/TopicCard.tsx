@@ -11,7 +11,7 @@ interface TopicCardProps {
 }
 
 const TopicCard = ({ image, topicName, topicDescription }: TopicCardProps) => (
-  <Card sx={{ maxWidth: 345 }}>
+  <Card sx={{ width: 345, height: 230, direction: 'rtl' }}>
     <CardActionArea>
       <CardMedia
         component='img'
