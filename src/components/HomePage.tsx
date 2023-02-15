@@ -1,18 +1,47 @@
+import Box from '@mui/material/Box/Box';
 import React from 'react';
-import PostPeekCard from './PostPeek';
+import TopicCard from './TopicCard';
 
 const HomePage = () => (
   <>
-    {/* <PostPeekCard
-      post={{
-        id: 1,
-        author: { displayName: 'asdf', pictureUrl: '' },
-        topic: { id: 1, name: 'מנהיגות' },
-        title: 'תחרות',
-        content: 'האקתון  איזה כיהאקתון  איזה כיהאקתון  איזה כיף',
-        uploadDate: new Date(),
-      }}
-    /> */}
+    <Box
+      margin={1}
+      padding={1}
+      display={'flex'}
+      flexDirection={'row-reverse'}
+      borderRadius={1}
+    >
+      <Box margin={2}>
+        <TopicCard
+          image={'/resources/img1.jpg'}
+          topicName={'מנהיגות'}
+          topicDescription={
+            'מהי מנהיגות? כיצד ניצן לממש אותה? פורום ההנהלה כאן בשבילכם'
+          }
+        />
+      </Box>
+      <Box margin={2}>
+        <TopicCard
+          image={'/resources/img2.jpg'}
+          topicName={'עבודה'}
+          topicDescription={'חיפוש עובדים ומשרות פנויות'}
+        />
+      </Box>{' '}
+      <Box margin={2}>
+        <TopicCard
+          image={'/resources/img3.jpg'}
+          topicName={'לימודים ומלגות'}
+          topicDescription={'כל מה שתצטרכו לדעת לגבי הלימודים שלכם'}
+        />
+      </Box>
+      <Box margin={2}>
+        <TopicCard
+          image={'/resources/img4.jpg'}
+          topicName={'פרויקטים'}
+          topicDescription={'פורום הפרויקטים הגדול. ניהול, הובלה, ייעוץ ועוד!'}
+        />
+      </Box>
+    </Box>
   </>
 );
 

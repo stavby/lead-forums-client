@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Container,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import React, { useState } from 'react';
+
 import { Link, Outlet } from 'react-router-dom';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -35,15 +38,19 @@ const Bar = () => {
 
   return (
     <>
-      <AppBar position='static'>
+      <AppBar position='static' style={{ background: '#FFF9EF' }}>
         <Container maxWidth='xl'>
           <Toolbar disableGutters>
             <Link to='/'>
-              <img alt='logo' src='resources/logo.jpeg' width={'25%'} />
+              <img alt='logo' src='resources/logo.png' width={'25%'} />
             </Link>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <IconButton size='large' onClick={toggleIsMenuOpen} color='inherit'>
+              <IconButton
+                size='large'
+                onClick={toggleIsMenuOpen}
+                color='inherit'
+              >
                 <MenuIcon />
               </IconButton>
               <Menu
@@ -66,7 +73,9 @@ const Bar = () => {
                 {/* Menu items for phones */}
               </Menu>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>{/*Menu items */}</Box>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              {/*Menu items */}
+            </Box>
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title='Open settings'>
