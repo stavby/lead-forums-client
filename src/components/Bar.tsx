@@ -57,7 +57,7 @@ const Bar = () => {
                   textDecoration: 'none',
                 }}
               >
-                LEAD Social
+                LEAD Socials
               </Typography>
             </Link>
 
