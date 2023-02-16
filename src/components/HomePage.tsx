@@ -1,11 +1,14 @@
 import Box from '@mui/material/Box/Box';
-import React, { useContext, useEffect } from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../providers/UserProvider';
+import { topic } from '../types';
 import TopicCard from './TopicCard';
 
 const HomePage = () => {
   const { user } = useContext(UserContext);
+  const [topics, setTopics] = useState<topic[] | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,6 +16,10 @@ const HomePage = () => {
       navigate('/login');
     }
   }, [user, navigate]);
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/topics`).then((result) => setTopics(result.data));
+  }, []);
 
   return (
     <>
@@ -25,27 +32,11 @@ const HomePage = () => {
         flexWrap={'wrap'}
         justifyContent={'space-around'}
       >
-        <Box margin={2}>
-          <TopicCard
-            image={'/resources/img1.jpg'}
-            topicName={'מנהיגות'}
-            topicDescription={'מהי מנהיגות? כיצד ניצן לממש אותה? פורום ההנהלה כאן בשבילכם'}
-          />
-        </Box>
-        <Box margin={2}>
-          <TopicCard
-            image={'/resources/img2.jpg'}
-            topicName={'עבודה'}
-            topicDescription={'חיפוש עובדים ומשרות פנויות'}
-          />
-        </Box>{' '}
-        <Box margin={2}>
-          <TopicCard
-            image={'/resources/img3.jpg'}
-            topicName={'לימודים ומלגות'}
-            topicDescription={'כל מה שתצטרכו לדעת לגבי הלימודים שלכם'}
-          />
-        </Box>
+        {topics?.map((topic) => (
+          <Box key={topic.topic_id} margin={2}>
+            <TopicCard topic={topic} />
+          </Box>
+        ))}
       </Box>
     </>
   );

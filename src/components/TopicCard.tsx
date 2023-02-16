@@ -1,121 +1,76 @@
-import { CardActionArea, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, CardActionArea, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import * as React from 'react';
+import { postWithUser, topic } from '../types';
 import PostPeekCard from './PostPeek';
+import axios from 'axios';
 
 interface TopicCardProps {
-  image: string;
-  topicName: string;
-  topicDescription: string;
+  topic: topic;
 }
 
-const TopicCard = ({ image, topicName, topicDescription }: TopicCardProps) => (
-  <Card
-    sx={{
-      width: 345,
-      height: 500,
-      direction: 'rtl',
-      display: 'flex',
-      flexDirection: 'column',
-      background: '#FFF9EF',
-    }}
-  >
-    <CardActionArea
+const TopicCard = ({ topic: { picture, topic_description, topic_name, topic_id } }: TopicCardProps) => {
+  const [posts, setPosts] = useState<postWithUser[] | null>(null);
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/posts/byTopic?topic=${topic_id}`)
+      .then((result) => setPosts(result.data));
+  }, [topic_id]);
+
+  return (
+    <Card
       sx={{
+        width: 345,
+        height: 500,
+        direction: 'rtl',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-start',
+        background: '#FFF9EF',
       }}
     >
-      <CardMedia component='img' height='130px' width='100%' image={image} />
-      <CardContent style={{ width: 300 }}>
-        <Typography gutterBottom variant='h5' component='div'>
-          {topicName}
-        </Typography>
-        <Typography
-          variant='body2'
-          color='text.secondary'
-          style={{
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {topicDescription}
-        </Typography>
-      </CardContent>
-    </CardActionArea>
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-      }}
-    >
-      <div
-        style={{ display: 'flex', justifyContent: 'center', marginTop: '5%' }}
+      <CardActionArea
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+        }}
       >
-        <PostPeekCard
-          post={{
-            author: {
-              displayName: 'asdas',
-              pictureUrl: '/resources/Ellipse.png',
-            },
-            content: 'איזה כיף זה האקתון!!!! אין על הצוות',
-            title: 'האקתון 2023',
-            id: 1,
-            topic: {
-              id: 1,
-              name: 'מנהיגות',
-            },
-            uploadDate: new Date(),
-          }}
-        ></PostPeekCard>
-      </div>
+        <CardMedia component='img' height='130px' width='100%' image={picture} />
+        <CardContent style={{ width: 300 }}>
+          <Typography gutterBottom variant='h5' component='div'>
+            {topic_name}
+          </Typography>
+          <Typography
+            variant='body2'
+            color='text.secondary'
+            style={{
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {topic_description}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
       <div
-        style={{ display: 'flex', justifyContent: 'center', marginTop: '5%' }}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        }}
       >
-        <PostPeekCard
-          post={{
-            author: {
-              displayName: 'asdas',
-              pictureUrl: '/resources/Ellipse.png',
-            },
-            content: 'איזה כיף זה האקתון!!!! אין על הצוות',
-            title: 'האקתון 2023',
-            id: 1,
-            topic: {
-              id: 1,
-              name: 'מנהיגות',
-            },
-            uploadDate: new Date(),
-          }}
-        ></PostPeekCard>
+        {posts?.map((post) => (
+          <Box key={post.post_id} style={{ display: 'flex', justifyContent: 'center', marginTop: '5%' }}>
+            <PostPeekCard post={post}></PostPeekCard>
+          </Box>
+        ))}
       </div>
-      <div
-        style={{ display: 'flex', justifyContent: 'center', marginTop: '5%' }}
-      >
-        <PostPeekCard
-          post={{
-            author: {
-              displayName: 'asdas',
-              pictureUrl: '/resources/Ellipse.png',
-            },
-            content: 'איזה כיף זה האקתון!!!! אין על הצוות',
-            title: 'האקתון 2023',
-            id: 1,
-            topic: {
-              id: 1,
-              name: 'מנהיגות',
-            },
-            uploadDate: new Date(),
-          }}
-        ></PostPeekCard>
-      </div>
-    </div>
-  </Card>
-);
+    </Card>
+  );
+};
 
 export default TopicCard;
