@@ -1,4 +1,3 @@
-import CardMedia from '@mui/material/CardMedia/CardMedia';
 import React from 'react';
 
 interface MiddleBoxProfilePageProps {
