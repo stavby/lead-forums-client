@@ -31,7 +31,7 @@ const MiddleBoxProfilePage = ({
       }}
       src={image}
     />
-    <Typography>{name}</Typography>
+    <Typography style={{ fontWeight: 'bold' }}>{name}</Typography>
     <Typography>{role}</Typography>
     <div style={{ justifyContent: 'flex-start' }}>
       {/* <img width='180' height='180' src='/resources/instagram.png' /> */}
