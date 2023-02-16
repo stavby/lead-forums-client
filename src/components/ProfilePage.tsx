@@ -1,3 +1,4 @@
+import ProfileBioCard from './ProfileBioCard';
 import Box from '@mui/material/Box/Box';
 import React, { useContext } from 'react';
 import { UserContext } from '../providers/UserProvider';
@@ -34,7 +35,13 @@ const ProfilePage = () => {
             facebookLink=''
           />
         </Box>
-        <div style={{ flex: '33.3%' }}> asd3 </div>
+        <div style={{ flex: '33.3%' }}>
+          {' '}
+          <div style={{ textAlign: 'center', fontSize: 30, marginBottom: 20 }}>
+            פרטים
+          </div>{' '}
+          <ProfileBioCard />{' '}
+        </div>
       </div>
     </>
   );
