@@ -19,7 +19,7 @@ const MiddleBoxProfilePage = ({
   facebookLink,
 }: MiddleBoxProfilePageProps) => (
   <>
-    <CardMedia component='img' height='50' width='50' src={image} />
+    <img width='175' height='175' src={image} />
   </>
 );
 
