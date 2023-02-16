@@ -7,20 +7,24 @@ import { UserContext } from '../providers/UserProvider';
 
 const infoStyle = {
   fontSize: 17,
+  flex: '20%',
+  marginTop: '25%',
 };
 
 const infoValueStyle = {
-  fontSize: 14,
+  fontSize: 15,
+  flex: '20%',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  fontWeight: 'bold'
+  fontWeight: 'bold',
+  marginTop: '25%',
 };
 const ProfileBioCard = () => {
   const { user, setUser } = useContext(UserContext);
 
   return (
-    <Card sx={{ minWidth: 275, direction: 'rtl', width: 390}}>
+    <Card sx={{ minWidth: 275, direction: 'rtl', width: 390 }}>
       <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <div
           style={{
@@ -28,7 +32,7 @@ const ProfileBioCard = () => {
             display: 'flex',
             flexDirection: 'column',
             fontSize: 20,
-            justifyContent: 'space-between',
+            justifyContent: 'space-around',
           }}
         >
           <Typography style={infoStyle} variant='body2'>
@@ -53,8 +57,6 @@ const ProfileBioCard = () => {
             width: 100,
             display: 'flex',
             flexDirection: 'column',
-            fontSize: 20,
-            justifyContent: 'space-between',
           }}
         >
           <Typography sx={infoValueStyle} variant='body2'>
@@ -70,7 +72,7 @@ const ProfileBioCard = () => {
             {user?.nativeUser?.email}
           </Typography>
           <Typography sx={infoValueStyle} variant='body2'>
-            פרטי
+            0505055050
           </Typography>
         </div>
       </CardContent>
