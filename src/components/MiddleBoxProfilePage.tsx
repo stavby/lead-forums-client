@@ -1,4 +1,5 @@
 import zIndex from '@mui/material/styles/zIndex';
+import Typography from '@mui/material/Typography/Typography';
 import React from 'react';
 
 interface MiddleBoxProfilePageProps {
@@ -30,6 +31,11 @@ const MiddleBoxProfilePage = ({
       }}
       src={image}
     />
+    <Typography>{name}</Typography>
+    <Typography>{role}</Typography>
+    <div style={{ justifyContent: 'flex-start' }}>
+      {/* <img width='180' height='180' src='/resources/instagram.png' /> */}
+    </div>
   </>
 );
 
