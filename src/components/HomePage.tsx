@@ -1,7 +1,8 @@
+import { Button } from '@mui/material';
 import Box from '@mui/material/Box/Box';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../providers/UserProvider';
 import { topic } from '../types';
 import TopicCard from './TopicCard';
@@ -11,6 +12,13 @@ const HomePage = () => {
   const [topics, setTopics] = useState<topic[] | null>(null);
   const navigate = useNavigate();
 
+  const refreshHomepage = () => {
+    setTopics(null);
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/topics`).then((result) => {
+      setTopics(result.data);
+    });
+  };
+
   useEffect(() => {
     if (!user) {
       navigate('/login');
@@ -18,11 +26,16 @@ const HomePage = () => {
   }, [user, navigate]);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/topics`).then((result) => setTopics(result.data));
+    refreshHomepage();
   }, []);
 
   return (
     <>
+      <Link to='/'>
+        <Button variant='contained' onClick={refreshHomepage}>
+          רענן
+        </Button>
+      </Link>
       <Box
         margin={1}
         padding={1}

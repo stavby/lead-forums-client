@@ -14,17 +14,19 @@ import { googleLogout } from '@react-oauth/google';
 import React, { useContext, useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { UserContext } from '../providers/UserProvider';
+import CreatePost from './CreatePost';
 
 const Bar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false);
+  const [isCreatePostOpen, setIsCreatePostOpen] = useState<boolean>(false);
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const settings = [
-    { display: 'Profile', onSelect: () => navigate('/profile') },
+  const userSettings = [
+    { label: 'Profile', onSelect: () => navigate('/profile') },
     {
-      display: 'Logout',
+      label: 'Logout',
       onSelect: () => {
         if (!user) {
           return;
@@ -33,6 +35,16 @@ const Bar = () => {
         googleLogout();
         setUser(null);
       },
+    },
+  ];
+
+  const menuItems = [
+    {
+      label: 'פוסט חדש',
+      onSelect: () => {
+        setIsCreatePostOpen(true);
+      },
+      isShown: () => !!user,
     },
   ];
 
@@ -84,7 +96,17 @@ const Bar = () => {
                 {/* Menu items for phones */}
               </Menu>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>{/*Menu items */}</Box>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              {menuItems.map(
+                (item) =>
+                  item.isShown() && (
+                    <Button key={item.label} onClick={item.onSelect}>
+                      {item.label}
+                    </Button>
+                  )
+              )}
+              <CreatePost isOpen={isCreatePostOpen} handleClose={() => setIsCreatePostOpen(false)} />
+            </Box>
 
             <Box sx={{ flexGrow: 0 }}>
               {user ? (
@@ -112,7 +134,7 @@ const Bar = () => {
                     open={isUserMenuOpen}
                     onClose={handleCloseUserMenu}
                   >
-                    {settings.map(({ display, onSelect }) => (
+                    {userSettings.map(({ label: display, onSelect }) => (
                       <MenuItem
                         key={display}
                         onClick={() => {
