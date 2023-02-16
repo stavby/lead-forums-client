@@ -22,7 +22,7 @@ const Bar = () => {
   const navigate = useNavigate();
 
   const settings = [
-    { display: 'Profile', onSelect: () => {} },
+    { display: 'Profile', onSelect: () => navigate('/profile') },
     {
       display: 'Logout',
       onSelect: () => {
@@ -113,7 +113,13 @@ const Bar = () => {
                     onClose={handleCloseUserMenu}
                   >
                     {settings.map(({ display, onSelect }) => (
-                      <MenuItem key={display} onClick={onSelect}>
+                      <MenuItem
+                        key={display}
+                        onClick={() => {
+                          setIsUserMenuOpen(false);
+                          onSelect();
+                        }}
+                      >
                         <Typography textAlign='center'>{display}</Typography>
                       </MenuItem>
                     ))}
