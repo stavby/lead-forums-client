@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,13 +10,31 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link, Outlet } from 'react-router-dom';
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { googleLogout } from '@react-oauth/google';
+import { UserContext } from '../providers/UserProvider';
+import { Button } from '@mui/material';
 
 const Bar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false);
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const settings = [
+    { display: 'Profile', onSelect: () => {} },
+    {
+      display: 'Logout',
+      onSelect: () => {
+        if (!user) {
+          return;
+        }
+
+        googleLogout();
+        setUser(null);
+      },
+    },
+  ];
 
   const toggleIsMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setIsMenuOpen(!isMenuOpen);
@@ -69,37 +87,48 @@ const Bar = () => {
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>{/*Menu items */}</Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title='Open settings'>
-                <IconButton onClick={toggleIsUserMenuOpen} sx={{ p: 0 }}>
-                  <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id='menu-appbar'
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={isUserMenuOpen}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign='center'>{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+              {user ? (
+                <>
+                  <Tooltip title='Open settings'>
+                    <IconButton onClick={toggleIsUserMenuOpen} sx={{ p: 0 }}>
+                      <Avatar
+                        imgProps={{ referrerPolicy: 'no-referrer' }}
+                        src={user?.picture ?? '/static/images/avatar/2.jpg'}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: '45px' }}
+                    id='menu-appbar'
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={isUserMenuOpen}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {settings.map(({ display, onSelect }) => (
+                      <MenuItem key={display} onClick={onSelect}>
+                        <Typography textAlign='center'>{display}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </>
+              ) : (
+                <Button variant='contained' onClick={() => navigate('/login')}>
+                  Login
+                </Button>
+              )}
             </Box>
           </Toolbar>
         </Container>
       </AppBar>
-      <Box>
+      <Box height={'100%'}>
         <Outlet />
       </Box>
     </>

@@ -1,14 +1,21 @@
+import { CredentialResponse } from '@react-oauth/google';
+
 interface User {
+  id: number;
   name: string;
-  native_user: GoogleUser | null;
+  picture?: string;
+  nativeUser: GoogleUser | null;
 }
 
 interface UserState {
   user: User | null;
-  setUser: (user: User) => void;
+  setUser: (user: User | null) => void;
 }
 
 interface GoogleUser {
-  clientId: string;
-  credential: string;
+  name: string;
+  given_name: string;
+  family_name: string;
+  picture: string;
+  email: string;
 }
