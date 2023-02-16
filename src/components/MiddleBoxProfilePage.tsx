@@ -19,7 +19,7 @@ const MiddleBoxProfilePage = ({
   facebookLink,
 }: MiddleBoxProfilePageProps) => (
   <>
-    <img width='175' height='175' src={image} />
+    <img width='180' height='180' style={{ borderRadius: '50%' }} src={image} />
   </>
 );
 
