@@ -11,7 +11,7 @@ const ProfilePage = () => (
       width='100%'
       image='/resources/profilePageBackground.png'
     />
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
       <Box>Box 1</Box>
       <MiddleBoxProfilePage
         image='/resources/profpic.png'
