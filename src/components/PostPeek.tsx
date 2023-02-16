@@ -7,24 +7,23 @@ import * as React from 'react';
 import { post } from '../types';
 
 const styles = {
-  cardSizes: { width: 360, height: 100 },
+  cardSizes: { width: 320, height: 70 },
   profilePicture: { width: '20%', marginRight: '10px' },
   postContent: {
     cardStyle: {
-      direction: 'rtl',
       height: 100,
       padding: '15px',
       marginTop: '35px',
     },
     cardText: {
       title: {
-        fontSize: 18,
+        fontSize: 16,
         height: 30,
       },
       content: {
         fontSize: '11px',
         maxHeight: 60,
-        width: 150,
+        width: 120,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
@@ -35,7 +34,7 @@ const styles = {
 };
 
 const PostPeekCard = ({
-  post: { title, content, uploadDate },
+  post: { title, content, uploadDate, author },
 }: {
   post: post;
 }) => (
@@ -45,13 +44,12 @@ const PostPeekCard = ({
         height: styles.cardSizes.height,
         width: styles.cardSizes.width,
         display: 'flex',
-        flexDirection: 'row-reverse',
+        flexDirection: 'row',
       }}
     >
       <CardMedia
         component='img'
-        src='resources/Ellipse.png'
-        alt='green iguana'
+        src={author.pictureUrl}
         sx={styles.profilePicture}
       />
       <CardContent sx={styles.postContent.cardStyle}>
