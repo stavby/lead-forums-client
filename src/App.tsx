@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Bar from './components/Bar';
 import HomePage from './components/HomePage';
+import ProfilePage from './components/ProfilePage';
 import { pages } from './Pages';
 import UserProvider from './providers/UserProvider';
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -15,7 +16,11 @@ const App = () => (
           <Route path='/' element={<Bar />}>
             <Route index element={<HomePage />} />
             {pages.map((page) => (
-              <Route key={page.path} path={page.path} element={page.component} />
+              <Route
+                key={page.path}
+                path={page.path}
+                element={page.component}
+              />
             ))}
           </Route>
         </Routes>

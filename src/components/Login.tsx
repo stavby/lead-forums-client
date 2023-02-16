@@ -21,15 +21,23 @@ const Login = () => {
   useEffect(() => {
     if (googleUser) {
       axios
-        .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
-          headers: {
-            Authorization: `Bearer ${googleUser.access_token}`,
-            Accept: 'application/json',
-          },
-        })
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleUser.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${googleUser.access_token}`,
+              Accept: 'application/json',
+            },
+          }
+        )
         .then(async (result) => {
           const resultUser: GoogleUser = result.data;
-          const userId = (await axios.put(`${process.env.REACT_APP_SERVER_URL}/users/login`, resultUser)).data;
+          const userId = (
+            await axios.put(
+              `${process.env.REACT_APP_SERVER_URL}/users/login`,
+              resultUser
+            )
+          ).data;
           setUser({
             id: userId,
             name: resultUser.name,
@@ -58,7 +66,11 @@ const Login = () => {
         height='30vh'
         mx='auto'
         my='10%'
-        sx={{ backgroundColor: '#FFEFD4', borderRadius: '3%', color: '#5E021C' }}
+        sx={{
+          backgroundColor: '#FFEFD4',
+          borderRadius: '3%',
+          color: '#5E021C',
+        }}
       >
         <Box pt={3}>
           <Typography fontSize={'5vh'}>כניסה</Typography>
