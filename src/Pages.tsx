@@ -1,8 +1,8 @@
 import React from 'react';
 import Login from './components/Login';
-import Profile from './components/Profile';
+import ProfilePage from './components/ProfilePage';
 
 export const pages = [
-  { path: 'profile', component: <Profile /> },
+  { path: 'profile', component: <ProfilePage /> },
   { path: 'login', component: <Login /> },
 ];

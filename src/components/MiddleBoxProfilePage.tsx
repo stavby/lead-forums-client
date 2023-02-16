@@ -1,3 +1,4 @@
+import zIndex from '@mui/material/styles/zIndex';
 import React from 'react';
 
 interface MiddleBoxProfilePageProps {
@@ -18,7 +19,17 @@ const MiddleBoxProfilePage = ({
   facebookLink,
 }: MiddleBoxProfilePageProps) => (
   <>
-    <img width='180' height='180' style={{ borderRadius: '50%' }} src={image} />
+    <img
+      width='180'
+      height='180'
+      style={{
+        borderRadius: '50%',
+        position: 'relative',
+        zIndex: 2,
+        top: '-50px',
+      }}
+      src={image}
+    />
   </>
 );
 
