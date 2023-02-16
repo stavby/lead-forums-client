@@ -19,6 +19,7 @@ const TopicCard = ({ image, topicName, topicDescription }: TopicCardProps) => (
       direction: 'rtl',
       display: 'flex',
       flexDirection: 'column',
+      background: '#FFF9EF',
     }}
   >
     <CardActionArea
