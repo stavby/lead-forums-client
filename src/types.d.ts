@@ -21,15 +21,21 @@ interface GoogleUser {
 }
 
 interface post {
-  id: number;
+  post_id: number;
   author: user;
-  topic: topic;
+  topic_id: number;
   title: string;
   content: string;
-  uploadDate: Date;
+  upload_time: Date;
+}
+
+interface postWithUser extends post {
+  user: { user_id: number; picture: string };
 }
 
 interface topic {
-  id: number;
-  name: string;
+  topic_id: number;
+  topic_name: string;
+  topic_description: string;
+  picture: string;
 }
