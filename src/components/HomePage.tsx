@@ -10,6 +10,8 @@ const HomePage = () => (
       display={'flex'}
       flexDirection={'row-reverse'}
       borderRadius={1}
+      flexWrap={'wrap'}
+      justifyContent={'space-around'}
     >
       <Box margin={2}>
         <TopicCard
@@ -32,13 +34,6 @@ const HomePage = () => (
           image={'/resources/img3.jpg'}
           topicName={'לימודים ומלגות'}
           topicDescription={'כל מה שתצטרכו לדעת לגבי הלימודים שלכם'}
-        />
-      </Box>
-      <Box margin={2}>
-        <TopicCard
-          image={'/resources/img4.jpg'}
-          topicName={'פרויקטים'}
-          topicDescription={'פורום הפרויקטים הגדול. ניהול, הובלה, ייעוץ ועוד!'}
         />
       </Box>
     </Box>
